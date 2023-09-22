@@ -12,26 +12,6 @@ If you are looking for routine procedures and operations to manage PostHog insta
 
 ## Troubleshooting
 
-### Helm failed for not enough resources
-
-While running `helm upgrade --install` you might run into an error like `timed out waiting for the condition`
-
-One of the potential causes is that Kubernetes doesn't have enough resources to schedule all the services PostHog needs to run. To know if resources are a problem we can check pod status and errors while the `helm` command is still running:
-
-1. check the output for `kubectl get pods -n posthog` and if you see any pending pods for a long time then that could be the problem
-
-2. check if the pending pod has scheduling errors using `kubectl describe pod <podname> -n posthog`. For example, at the end of the events section we could see that we didn't have enough memory to schedule the pod.
-
-```
-Events:
-  Type     Reason             Age                  From                Message
-  ----     ------             ----                 ----                -------
-  Normal   NotTriggerScaleUp  3m23s                cluster-autoscaler  pod didn't trigger scale-up:
-  Warning  FailedScheduling   45s (x5 over 3m47s)  default-scheduler   0/3 nodes are available: 3 Insufficient memory.
-```
-
-**How to fix this**: add more nodes to your Kubernetes cluster.
-
 ### Connection is not secure
 
 First, check that DNS is set up properly:
@@ -63,18 +43,6 @@ There isn't a way for us to say "if there's less than X% of disk space left, the
 We need to configure these well, but a disk monitoring utility can help catch this problem before we end up in a crash loop.
 
 See more in these stack overflow questions ([1](https://stackoverflow.com/questions/52970153/kafka-how-to-avoid-running-out-of-disk-storage), [2](https://stackoverflow.com/questions/53039752/kafka-how-to-calculate-the-value-of-log-retention-byte), [3](https://stackoverflow.com/questions/51823569/kafka-retention-policies)).
-
-### Upgrade failed due to cert-manager conflicts
-
-If a deploy fails with the following error:
-
-```
-Error: UPGRADE FAILED: rendered manifests contain a resource that already exists. Unable to continue with update: CustomResourceDefinition "certificaterequests.cert-manager.io" in namespace "" exists and cannot be imported into the current release: invalid ownership metadata; label validation error: missing key "app.kubernetes.io/managed-by": must be set to "Helm"; annotation validation error: missing key "meta.helm.sh/release-name": must be set to "posthog"; annotation validation error: missing key "meta.helm.sh/release-namespace": must be set to "posthog"
-```
-
-The issue might be with cert-manager custom resource definitions already existing and being unupgradable.
-
-Try running helm upgrade without `--atomic` to fix this issue.
 
 ### Namespace deletion stuck at `terminating`
 
