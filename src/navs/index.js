@@ -1494,24 +1494,12 @@ export const docsMenu = {
                                     url: '/docs/self-host/configure/securing-posthog',
                                 },
                                 {
-                                    name: 'Monitoring with Grafana',
-                                    url: '/docs/self-host/configure/monitoring-with-grafana',
-                                },
-                                {
                                     name: 'Running behind a proxy',
                                     url: '/docs/self-host/configure/running-behind-proxy',
                                 },
                                 {
                                     name: 'Configuring email',
                                     url: '/docs/self-host/configure/email',
-                                },
-                                {
-                                    name: 'Helm chart configuration',
-                                    url: '/docs/self-host/deploy/configuration',
-                                },
-                                {
-                                    name: 'Deploying ClickHouse using Altinity.Cloud',
-                                    url: '/docs/self-host/configure/using-altinity-cloud',
                                 },
                                 {
                                     name: 'Configuring Slack',

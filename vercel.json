@@ -989,7 +989,9 @@
         { "source": "/docs/runbook/services/minio", "destination": "/docs/self-host" },
         { "source": "/docs/runbook/services/redis", "destination": "/docs/self-host" },
         { "source": "/docs/runbook/services/zookeeper", "destination": "/docs/self-host" },
-        { "source": "/docs/runbook/disaster-recovery", "destination": "/docs/self-host" }
+        { "source": "/docs/runbook/disaster-recovery", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/configure/monitoring-with-grafana", "destination": "/docs/self-host" },
+        { "source": "/docs/self-host/configure/using-altinity-cloud", "destination": "/docs/self-host" }
     ],
     "rewrites": [
         { "source": "/community/profiles/:path*", "destination": "/community/profiles/[id]/index.html" },
